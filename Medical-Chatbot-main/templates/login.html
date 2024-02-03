@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+    <title>Medical Chatbot</title>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Medical Chatbot"
+      agent-id="f453fa1f-984e-46fc-8f86-262329a6fbfb"
+      language-code="en"
+    ></df-messenger>
+    <style>
+        a:link {
+        text-decoration: none;
+        }
+        a:hover {
+        text-decoration: underline;
+        }
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body background="{{url_for('static', filename='background.svg')}}" style="padding: 0; width: 100%; height: 100%;background-repeat: no-repeat;background-size: 100%;">
+    <div>
+        <div class=" d-flex flex-row mt-3 mb-3">
+            <h1 style="position: relative;top: 15px;margin-left: 40px;color: black;"><b>Medical Chatbot</b></h1>
+            <h4 style="position: relative;top: 29px;margin-left: 940px;color: black;">{{ user_name }}</h4>
+            <a style="position: relative;top: 32px;margin-left: 30px;color: black;" href="/signout">Sign out</a>
+        </div>
+          <div style="width: 200px;float: left;margin-top: 100px;margin-left: 50px;" class="container">
+            <div class="card px-1 py-4">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-3">Medical history</h1>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center><table>
+                                    <tr>
+                                      <th>Date</th>
+                                      <th>Symptoms</th>
+                                      <th>Predicted disease</th>
+                                      <th>Consult doctor</th>
+                                    </tr>
+                                    {% for i in medicalhistory: %}
+                                    <tr>
+                                        <td>{{ i[1] }}</td>
+                                        <td>{{ i[2] }}</td>
+                                        <td>{{ i[3] }}</td>
+                                        <td>{{ i[5] }} <br> {{ i[6] }} <br> <a href="{{ i[7] }}" target="_blank">link</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                  </table></center>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
